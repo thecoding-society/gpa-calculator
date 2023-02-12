@@ -1,5 +1,8 @@
 
 class subject:
+    """
+    This class stores the credit and grade point of a subject.
+    """
 
     def __init__(self, credit, grade_point):
         self.credit = credit
@@ -10,6 +13,11 @@ class subject:
 
 
 class gpa(subject):
+    """
+    This class calculates the GPA of a student.
+    It takes the credit and grade point of each subject as input and returns the GPA.
+    """
+
     no_of_subjects = 0
 
     def __init__(self):
@@ -19,6 +27,11 @@ class gpa(subject):
         self.sub=[]
 
     def addsubject(self, credit, grade_point):
+        """
+        addsubject(credit, grade_point)
+        This function adds a subject to the list of subjects.
+        """
+
         if credit < 0 or grade_point < 0:
             print("Credit and Grade Point cannot be negative.")
             return
@@ -34,6 +47,11 @@ class gpa(subject):
 
         
     def calc(self):
+        """
+        calc()
+        This function calculates the GPA of the student.
+        """
+
         if self.no_of_subjects == 0:
             print("No subjects added yet. Run addsubject(credit, grade_point) first.")
             return
@@ -50,6 +68,11 @@ class gpa(subject):
         return self.gpa
 
     def display(self):
+        """
+        display()
+        This function displays the number of subjects and the GPA.
+        """
+
         if self.no_of_subjects == 0:
             print("No subjects added yet. Run addsubject(credit, grade_point) first and then run calc().")
             return
@@ -61,6 +84,10 @@ class gpa(subject):
         print("GPA: ", self.gpa)
     
     def __str__(self):
+
+        if self.no_of_subjects == 0:
+            return "No subjects added yet. Run addsubject(credit, grade_point) first."
+        
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
 def main():
