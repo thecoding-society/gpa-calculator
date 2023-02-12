@@ -8,6 +8,7 @@ class subject:
     def __str__(self):
         return "Credit: " + str(self.credit) + "\nGrade Point: " + str(self.grade_point)
 
+
 class gpa(subject):
     no_of_subjects = 0
 
@@ -18,18 +19,44 @@ class gpa(subject):
         self.sub=[]
 
     def addsubject(self, credit, grade_point):
+        if credit < 0 or grade_point < 0:
+            print("Credit and Grade Point cannot be negative.")
+            return
+        if credit > 8:
+            print("Credit cannot be greater than 8.")
+            return
+        if grade_point > 10:
+            print("Grade Point cannot be greater than 10.")
+            return
+        
         self.sub.append(subject(credit, grade_point))
         self.no_of_subjects += 1
 
         
     def calc(self):
+        if self.no_of_subjects == 0:
+            print("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            return
+
         for i in range(self.no_of_subjects):
             self.numerator += self.sub[i].credit * self.sub[i].grade_point
             self.denominator += self.sub[i].credit
         self.gpa = self.numerator / self.denominator
+
+        if self.gpa > 10:
+            print("GPA cannot be greater than 10. Please check your inputs.")
+            return
+
         return self.gpa
 
     def display(self):
+        if self.no_of_subjects == 0:
+            print("No subjects added yet. Run addsubject(credit, grade_point) first and then run calc().")
+            return
+        if self.gpa == 0.0:
+            print("No GPA calculated yet. Run calc() first.")
+            return
+        
         print("No of subjects: ", self.no_of_subjects)
         print("GPA: ", self.gpa)
     
