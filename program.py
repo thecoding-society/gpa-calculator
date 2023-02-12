@@ -22,7 +22,12 @@ class gpa(subject):
         self.no_of_subjects += 1
 
         
-    
+    def calc(self):
+        for i in range(self.no_of_subjects):
+            self.numerator += self.sub[i].credit * self.sub[i].grade_point
+            self.denominator += self.sub[i].credit
+        self.gpa = self.numerator / self.denominator
+        return self.gpa
 
     def display(self):
         print("No of subjects: ", self.no_of_subjects)
@@ -42,6 +47,7 @@ def main():
     gpa1.addsubject(4, 9)
     gpa1.addsubject(3, 8)
 
+    gpa1.calc()
     gpa1.display()
 
 if __name__ == "__main__":
