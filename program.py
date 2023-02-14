@@ -61,8 +61,8 @@ class gpa(subject):
         """
 
         if self.no_of_subjects == 0:
-            print("No subjects added yet. Run addsubject(credit, grade_point) first.")
-            return
+            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            
 
         for i in range(self.no_of_subjects):
             self.numerator += self.sub[i].credit * self.sub[i].grade_point
