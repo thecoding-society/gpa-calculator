@@ -43,15 +43,12 @@ class gpa(subject):
         This function adds a subject to the list of subjects.
         """
 
-        if credit < 0 or grade_point < 0:
-            print("Credit and Grade Point cannot be negative.")
-            return
+        # limits on credit and grade point
         if credit > 8:
-            print("Credit cannot be greater than 8.")
-            return
+            raise ValueError("Credit cannot be greater than 8.")
         if grade_point > 10:
-            print("Grade Point cannot be greater than 10.")
-            return
+            raise ValueError("Grade Point cannot be greater than 10.")
+            
         
         self.sub.append(subject(credit, grade_point))
         self.no_of_subjects += 1

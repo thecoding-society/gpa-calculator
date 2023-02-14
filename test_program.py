@@ -27,13 +27,67 @@ def test_subject_class():
     with pytest.raises(TypeError):
         obj = subject(3, True)
 
+    # raise an error if the credit and grade point is not negative
+    with pytest.raises(ValueError):
+        obj = subject(-3, 9)
+    with pytest.raises(ValueError):
+        obj = subject(3, -9)
+    with pytest.raises(ValueError):
+        obj = subject(-3, -9)
     
 
-def test_gpa_class():
-    pass
-
 def test_addsubject():
-    pass
+    # create an object of the gpa class
+    obj = gpa()
+
+    # Test if the addsubject function is defined
+    obj.addsubject(4, 10)
+    assert obj.no_of_subjects == 1
+    assert obj.sub[0].credit == 4
+    assert obj.sub[0].grade_point == 10
+
+    obj.addsubject(3, 9)
+    assert obj.no_of_subjects == 2
+    assert obj.sub[1].credit == 3
+    assert obj.sub[1].grade_point == 9
+
+    # raise an error if the credit is not an integer
+    with pytest.raises(TypeError):
+        obj.addsubject(3.5, 9)
+    with pytest.raises(TypeError):
+        obj.addsubject('three', 9)
+    with pytest.raises(TypeError):
+        obj.addsubject(True, 9)
+
+    # raise an error if the grade_point is not an integer
+    with pytest.raises(TypeError):
+        obj.addsubject(3, 9.5)
+    with pytest.raises(TypeError):
+        obj.addsubject(3, 'nine')
+    with pytest.raises(TypeError):
+        obj.addsubject(3, True)
+
+    # raise an error if the credit and grade point is not negative
+    with pytest.raises(ValueError):
+        obj.addsubject(-3, 9)
+    with pytest.raises(ValueError):
+        obj.addsubject(3, -9)
+    with pytest.raises(ValueError):
+        obj.addsubject(-3, -9)
+
+    # raise an error if the credit is greater than 8
+    with pytest.raises(ValueError):
+        obj.addsubject(9, 9)
+    with pytest.raises(ValueError):
+        obj.addsubject(13, 9)
+    
+    # raise an error if the grade point is greater than 10
+    with pytest.raises(ValueError):
+        obj.addsubject(3, 11)
+    with pytest.raises(ValueError):
+        obj.addsubject(3, 15)
+
+
 
 def test_calc():
     pass
@@ -72,4 +126,7 @@ def test_invalid_credit_and_grade_point():
     pass
 
 def test_proper():
+    pass
+
+def test_gpa_class():
     pass
