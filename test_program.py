@@ -263,7 +263,6 @@ def test_gpa_class(capsys):
         assert obj.sub[i].credit == credits[i]
         assert obj.sub[i].grade_point == grade_points[i]
 
-
     # calculate
     obj.calc()
 

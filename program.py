@@ -1,4 +1,3 @@
-
 class subject:
     """
     This class stores the credit and grade point of a subject.
@@ -98,6 +97,8 @@ class gpa(subject):
         
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
+
+
 def main():
     classobj = subject('ten', 8)
 
@@ -114,6 +115,7 @@ def main():
 
     gpa1.calc()
     gpa1.display()
+
 
 if __name__ == "__main__":
     main()
