@@ -4,7 +4,18 @@ class subject:
     This class stores the credit and grade point of a subject.
     """
 
+    # constructor
     def __init__(self, credit, grade_point):
+
+        # check if the credit and grade point are integers and are not negative
+        if type(credit) != int:
+            raise TypeError("Credit should be an integer.")
+        if type(grade_point) != int:
+            raise TypeError("Grade Point should be an integer.")
+        if credit < 0 or grade_point < 0:
+            raise ValueError("Credit and Grade Point cannot be negative.")
+        
+        
         self.credit = credit
         self.grade_point = grade_point
 
@@ -91,6 +102,9 @@ class gpa(subject):
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
 def main():
+    classobj = subject('ten', 8)
+
+
     gpa1 = gpa()
     gpa1.addsubject(2, 8)
     gpa1.addsubject(3, 8)
