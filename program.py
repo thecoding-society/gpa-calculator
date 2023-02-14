@@ -1,10 +1,20 @@
-
 class subject:
     """
     This class stores the credit and grade point of a subject.
     """
 
+    # constructor
     def __init__(self, credit, grade_point):
+
+        # check if the credit and grade point are integers and are not negative
+        if type(credit) != int:
+            raise TypeError("Credit should be an integer.")
+        if type(grade_point) != int:
+            raise TypeError("Grade Point should be an integer.")
+        if credit < 0 or grade_point < 0:
+            raise ValueError("Credit and Grade Point cannot be negative.")
+        
+        
         self.credit = credit
         self.grade_point = grade_point
 
@@ -36,16 +46,14 @@ class gpa(subject):
         This function adds a subject to the list of subjects.
         """
 
-        # Check if credit and grade point are valid
-        if credit < 0 or grade_point < 0:
-            print("Credit and Grade Point cannot be negative.")
-            return
+
+        # limits on credit and grade point
+
         if credit > 8:
-            print("Credit cannot be greater than 8.")
-            return
+            raise ValueError("Credit cannot be greater than 8.")
         if grade_point > 10:
-            print("Grade Point cannot be greater than 10.")
-            return
+            raise ValueError("Grade Point cannot be greater than 10.")
+            
         
         # Add subject to the list
         self.sub.append(subject(credit, grade_point))
@@ -58,11 +66,9 @@ class gpa(subject):
         This function calculates the GPA of the student.
         """
 
-        # Check if at least one subject is added
-        if self.no_of_subjects < 1:
-            print("No subjects added yet. Run addsubject(credit, grade_point) first.")
-            return
-        
+        if self.no_of_subjects == 0:
+            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
             self.numerator += self.sub[i].credit * self.sub[i].grade_point
@@ -84,15 +90,18 @@ class gpa(subject):
         This function displays the number of subjects and the GPA.
         """
 
+
         # Check if at least one subject is added
-        if self.no_of_subjects < 1:
-            print("No subjects added yet. Run addsubject(credit, grade_point) first and then run calc().")
-            return
-        
+        if self.no_of_subjects == 0:
+            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            
+
+       
+
         # Check if GPA is calculated
         if self.gpa == 0.0:
-            print("No GPA calculated yet. Run calc() first.")
-            return
+            raise ValueError("No GPA calculated yet. Run calc() first.")
+            
         
         # Display the number of subjects and the GPA
         print("No of subjects: ", self.no_of_subjects)
@@ -105,6 +114,7 @@ class gpa(subject):
         
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
+
 
 def main():
     # Create an object of the gpa class
