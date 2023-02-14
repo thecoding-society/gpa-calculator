@@ -211,6 +211,7 @@ def test_display(capsys):
     # check if the output is correct
     assert captured.out == "No of subjects:  8\nGPA:  7.9\n"
 
+
 def test_display_with_no_subjects():
     obj = gpa()
 
@@ -239,8 +240,41 @@ def test_display_with_no_calc():
     
     assert obj.gpa == 0.0
 
-    
 
 # gpa class overall test cases
-def test_gpa_class():
-    pass
+def test_gpa_class(capsys):
+    obj = gpa()
+
+    # add subjects
+    credits = [2, 3, 3, 4, 2, 4, 4, 3]
+    grade_points = [8, 8, 7, 8, 10, 9, 9, 8]
+
+    for i in range(len(credits)):
+        obj.addsubject(credits[i], grade_points[i])
+
+    # check if the number of subjects is correct
+    assert obj.no_of_subjects == 8
+
+    # check if subjects are added to list
+    assert len(obj.sub) == 8
+
+    # check if subjects are added correctly
+    for i in range(len(obj.sub)):
+        assert obj.sub[i].credit == credits[i]
+        assert obj.sub[i].grade_point == grade_points[i]
+
+
+    # calculate
+    obj.calc()
+
+    # display
+    obj.display()
+
+    # capture the output(prints)
+    captured = capsys.readouterr()
+
+    # check if the output is correct
+    assert captured.out == "No of subjects:  8\nGPA:  8.36\n"
+
+    # check if the gpa is correct
+    assert obj.gpa == 8.36
