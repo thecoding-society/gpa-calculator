@@ -188,8 +188,58 @@ def test_calc_with_no_subjects():
 
 # display function test cases
 
-def test_display():
-    pass
+def test_display(capsys):
+    obj = gpa()
+
+    # Test if the display function is defined
+    obj.addsubject(4, 10)
+    obj.addsubject(3, 9)
+    obj.addsubject(3, 8)
+    obj.addsubject(2, 7)
+    obj.addsubject(2, 7)
+    obj.addsubject(1, 9)
+    obj.addsubject(3, 8)
+    obj.addsubject(2, 3)
+
+    # calculate and call the display function
+    obj.calc()
+    obj.display()
+    
+    # capture the output(prints)
+    captured = capsys.readouterr()
+
+    # check if the output is correct
+    assert captured.out == "No of subjects:  8\nGPA:  7.9\n"
+
+def test_display_with_no_subjects():
+    obj = gpa()
+
+    # Test if the display function is defined
+    with pytest.raises(ValueError):
+        obj.display()
+    
+    assert obj.gpa == 0.0
+
+
+def test_display_with_no_calc():
+    obj = gpa()
+
+    # Test if the display function is defined
+    obj.addsubject(4, 10)
+    obj.addsubject(3, 9)
+    obj.addsubject(3, 8)
+    obj.addsubject(2, 7)
+    obj.addsubject(2, 7)
+    obj.addsubject(1, 9)
+    obj.addsubject(3, 8)
+    obj.addsubject(2, 3)
+
+    with pytest.raises(ValueError):
+        obj.display()
+    
+    assert obj.gpa == 0.0
+
+    
 
 # gpa class overall test cases
 def test_gpa_class():

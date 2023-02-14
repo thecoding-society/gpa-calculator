@@ -82,11 +82,11 @@ class gpa(subject):
         """
 
         if self.no_of_subjects == 0:
-            print("No subjects added yet. Run addsubject(credit, grade_point) first and then run calc().")
-            return
+            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            
         if self.gpa == 0.0:
-            print("No GPA calculated yet. Run calc() first.")
-            return
+            raise ValueError("No GPA calculated yet. Run calc() first.")
+            
         
         print("No of subjects: ", self.no_of_subjects)
         print("GPA: ", self.gpa)
