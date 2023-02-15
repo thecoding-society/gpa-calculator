@@ -1,3 +1,6 @@
+# modules
+from texttable import Texttable
+
 class Subject:
     """
     This class stores the credit and grade point of a subject.
@@ -102,8 +105,6 @@ class Gpa(Subject):
             raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
             
 
-       
-
         # Check if GPA is calculated
         if self.gpa == 0.0:
             raise ValueError("No GPA calculated yet. Run gpa.calc() first.")
@@ -112,6 +113,30 @@ class Gpa(Subject):
         # Display the number of subjects and the GPA
         print("No of subjects: ", self.no_of_subjects)
         print("GPA: ", self.gpa)
+
+    def added(self) -> None:
+        """
+        added()
+        This function displays the subjects added.
+        """
+        
+        table = Texttable()
+
+        table.header(["No.", "Credits", "Grade Points"])
+        table.set_cols_dtype(['i', 'i', 'i'])
+        table.set_cols_align(['r', 'r', 'r'])
+
+        for i in range(self.no_of_subjects):
+            table.add_row([i+1, self.sub[i].credit, self.sub[i].grade_point])
+
+        table.set_deco(Texttable.HEADER)
+        print('Subjects added:')
+        print(table.draw())
+        
+
+
+    def __repr__(self) -> str:
+        return "GPA Calculator"
     
     def __str__(self) -> str:
 
@@ -191,6 +216,24 @@ class Cgpa(Gpa):
         print("No of semesters: ", len(self.semester))
         print("CGPA: ", self.cgpa)
     
+    def added(self) -> None:
+        """
+        added()
+        This function displays the semesters added.
+        """
+        
+        table = Texttable()
+
+        table.header(["No.", "GPA", "\u03A3 GP*C", "\u03A3 Credits"])
+        table.set_cols_dtype(['i', 'f', 'i', 'i'])
+        table.set_cols_align(['r', 'r', 'r', 'r'])
+
+        for i in range(len(self.semester)):
+            table.add_row([i+1, self.semester[i].gpa, self.semester[i].numerator, self.semester[i].denominator])
+
+        table.set_deco(Texttable.HEADER)
+        print('Semesters added:')
+        print(table.draw())
 
     def __str__(self) -> str:
         return "No of semesters: " + str(len(self.semester)) + "CGPA: " + str(self.cgpa)
@@ -214,7 +257,8 @@ def main():
     gpa1.addsubject(4, 9)
     gpa1.addsubject(4, 9)
     gpa1.addsubject(3, 8)
-
+    
+    gpa1.added()
     # create an object of the gpa class
     gpa2 = Gpa()
 
@@ -235,6 +279,7 @@ def main():
     
     cgpa.addsemester(gpa1)
     cgpa.addsemester(gpa2)
+    cgpa.added()
     
     
     cgpa.calc()
