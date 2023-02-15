@@ -71,6 +71,12 @@ class Gpa(Subject):
             
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
+
+            # Check if the grade point is less than 5
+            if self.sub[i].grade_point < 5:
+                continue
+
+            # Calculate the numerator and denominator
             self.numerator += self.sub[i].credit * self.sub[i].grade_point
             self.denominator += self.sub[i].credit
         
@@ -141,6 +147,12 @@ class Cgpa(Gpa):
         
 
 def main():
+
+    print("GPA Calculator")
+    print("--------------")
+    print('Create gpa object and add subjects to it. Then run calc() to calculate the GPA and display() to display the results.')
+    print('Create cp object and add gpa objects to it. Then run calc() to calculate the CGPA and display() to display the results.')
+
     # Create an object of the gpa class
     gpa1 = Gpa()
 
@@ -153,10 +165,28 @@ def main():
     gpa1.addsubject(4, 9)
     gpa1.addsubject(4, 9)
     gpa1.addsubject(3, 8)
-    # Calculate the GPA
+
+    # create an object of the gpa class
+    gpa2 = Gpa()
+
+    # Add subjects
+    gpa2.addsubject(2, 9)
+    gpa2.addsubject(3, 10)
+    gpa2.addsubject(3, 7)
+    gpa2.addsubject(4, 9)
+    gpa2.addsubject(2, 6)
+    gpa2.addsubject(4, 10)
+    gpa2.addsubject(4, 9)
+    gpa2.addsubject(3, 8)
+
+
+
+    # Create an object of the cgpa class
     cgpa = Cgpa()
     
     cgpa.addsemester(gpa1)
+    cgpa.addsemester(gpa2)
+    
     cgpa.calc()
     cgpa.display()
     
