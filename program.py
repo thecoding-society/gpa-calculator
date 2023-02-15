@@ -67,7 +67,7 @@ class Gpa(Subject):
         """
 
         if self.no_of_subjects == 0:
-            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
             
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
@@ -99,14 +99,14 @@ class Gpa(Subject):
 
         # Check if at least one subject is added
         if self.no_of_subjects == 0:
-            raise ValueError("No subjects added yet. Run addsubject(credit, grade_point) first.")
+            raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
             
 
        
 
         # Check if GPA is calculated
         if self.gpa == 0.0:
-            raise ValueError("No GPA calculated yet. Run calc() first.")
+            raise ValueError("No GPA calculated yet. Run gpa.calc() first.")
             
         
         # Display the number of subjects and the GPA
@@ -116,32 +116,77 @@ class Gpa(Subject):
     def __str__(self):
 
         if self.no_of_subjects == 0:
-            return "No subjects added yet. Run addsubject(credit, grade_point) first."
+            return "No subjects added yet. Run gpa.addsubject(credit, grade_point) first."
         
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
 class Cgpa(Gpa):
-    
+    """
+    This class calculates the CGPA of a student.
+    It takes the GPA of each semester as input and returns the CGPA.
+    """
+
+    # Constructor
     def __init__(self):
         self.cgpa = 0.0
         self.total_numerator = 0.0
         self.total_denominator = 0
         self.semester = []
     
+
+    # Add a semester gpa
     def addsemester(self, gpa):
-        gpa.calc()
-        self.total_numerator += gpa.numerator
-        self.total_denominator += gpa.denominator
-        self.semester.append(gpa)
+        """
+        addsemester(gpa)
+        This function adds a semester gpa to the list of semester gpa.
+        """
+
+        # Check if the gpa is calculatable else raise an error
+        try:
+            gpa.calc()
+        except Exception as e:
+            print(f"Cannot add semester. {str(e)}", )
+            exit()
+        else:
+            self.total_numerator += gpa.numerator
+            self.total_denominator += gpa.denominator
+            self.semester.append(gpa)
         
+    # Calculate CGPA
     def calc(self):
+        """
+        calc()
+        This function calculates the CGPA of the student.
+        """
+
+        if len(self.semester) == 0:
+            raise ValueError("No semesters added yet. Run cgpa.addsemester(gpa) first.")
+        
+
         self.cgpa = self.total_numerator / self.total_denominator
+
+        if self.cgpa > 10:
+            print("CGPA cannot be greater than 10. Please check your inputs.")
+            return
+
         return self.cgpa
     
+    # Display CGPA
     def display(self):
+        """
+        display()
+        This function displays the number of semesters and the CGPA.
+        """
+
+        if len(self.semester) == 0:
+            raise ValueError("No semesters added yet. Run cgpa.addsemester(gpa) first.")
+        if self.cgpa == 0.0:
+            raise ValueError("No CGPA calculated yet. Run cgpa.calc() first.")
+        
         print("No of semesters: ", len(self.semester))
         print("CGPA: ", self.cgpa)
     
+
     def __str__(self):
         return "No of semesters: " + str(len(self.semester)) + "CGPA: " + str(self.cgpa)
         
@@ -149,9 +194,8 @@ class Cgpa(Gpa):
 def main():
 
     print("GPA Calculator")
-    print("--------------")
-    print('Create gpa object and add subjects to it. Then run calc() to calculate the GPA and display() to display the results.')
-    print('Create cp object and add gpa objects to it. Then run calc() to calculate the CGPA and display() to display the results.')
+    print("--------------\n")
+    
 
     # Create an object of the gpa class
     gpa1 = Gpa()
@@ -179,13 +223,14 @@ def main():
     gpa2.addsubject(4, 9)
     gpa2.addsubject(3, 8)
 
-
+    
 
     # Create an object of the cgpa class
     cgpa = Cgpa()
     
     cgpa.addsemester(gpa1)
     cgpa.addsemester(gpa2)
+    
     
     cgpa.calc()
     cgpa.display()
