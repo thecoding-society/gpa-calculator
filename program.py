@@ -1,4 +1,4 @@
-class subject:
+class Subject:
     """
     This class stores the credit and grade point of a subject.
     """
@@ -22,7 +22,7 @@ class subject:
         return "Credit: " + str(self.credit) + "\nGrade Point: " + str(self.grade_point)
 
 
-class gpa(subject):
+class Gpa(Subject):
     """
     This class calculates the GPA of a student.
     It takes the credit and grade point of each subject as input and returns the GPA.
@@ -56,7 +56,7 @@ class gpa(subject):
             
         
         # Add subject to the list
-        self.sub.append(subject(credit, grade_point))
+        self.sub.append(Subject(credit, grade_point))
         self.no_of_subjects += 1
 
     # Calculate GPA
