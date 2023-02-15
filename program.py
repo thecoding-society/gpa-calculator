@@ -114,11 +114,35 @@ class Gpa(Subject):
         
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
-
+class Cgpa(Gpa):
+    
+    def __init__(self):
+        self.cgpa = 0.0
+        self.total_numerator = 0.0
+        self.total_denominator = 0
+        self.semester = []
+    
+    def addsemester(self, gpa):
+        gpa.calc()
+        self.total_numerator += gpa.numerator
+        self.total_denominator += gpa.denominator
+        self.semester.append(gpa)
+        
+    def calc(self):
+        self.cgpa = self.total_numerator / self.total_denominator
+        return self.cgpa
+    
+    def display(self):
+        print("No of semesters: ", len(self.semester))
+        print("CGPA: ", self.cgpa)
+    
+    def __str__(self):
+        return "No of semesters: " + str(len(self.semester)) + "CGPA: " + str(self.cgpa)
+        
 
 def main():
     # Create an object of the gpa class
-    gpa1 = gpa()
+    gpa1 = Gpa()
 
     # Add subjects
     gpa1.addsubject(2, 8)
@@ -129,8 +153,13 @@ def main():
     gpa1.addsubject(4, 9)
     gpa1.addsubject(4, 9)
     gpa1.addsubject(3, 8)
-
     # Calculate the GPA
+    cgpa = Cgpa()
+    
+    cgpa.addsemester(gpa1)
+    cgpa.calc()
+    cgpa.display()
+    
     gpa1.calc()
 
     # Display the results
