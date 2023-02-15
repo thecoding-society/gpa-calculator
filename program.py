@@ -148,7 +148,7 @@ class Gpa(Subject):
         # Remove the subject from the list
         removed = self.sub.pop(index-1)
         self.no_of_subjects -= 1
-        print(f'Subject{removed.credit, removed.grade_point} removed successfully.')
+        print(f'Subject {index + 1} {removed.credit, removed.grade_point} removed successfully.')
 
     def __repr__(self) -> str:
         return "GPA Calculator"
@@ -251,6 +251,25 @@ class Cgpa(Gpa):
         print('Semesters added:')
         print(table.draw())
 
+    def removesemester(self, index: int) -> None:
+        """
+        removesemester(index)
+        Index values: 1-n
+        This function removes a semester from the list of semesters.
+        """
+        index = index-1
+        # Check if the index is valid
+        if index > len(self.semester) or index < 0:
+            raise ValueError(f"Index out of range. Input Index: {index+1} Index Region: 0 to {len(self.semester)}")
+            
+        
+        # Remove the semester from the list
+        removed = self.semester.pop(index-1)
+        print(f'Semester {index+1} {removed.gpa, removed.numerator, removed.denominator} removed successfully.')
+
+    def __repr__(self) -> str:
+        return "CGPA Calculator"
+
     def __str__(self) -> str:
         return "No of semesters: " + str(len(self.semester)) + "CGPA: " + str(self.cgpa)
         
@@ -283,7 +302,7 @@ def main():
 
     gpa1.added()
 
-def fake():
+
     # create an object of the gpa class
     gpa2 = Gpa()
 
@@ -305,7 +324,9 @@ def fake():
     cgpa.addsemester(gpa1)
     cgpa.addsemester(gpa2)
     cgpa.added()
-    
+
+    cgpa.removesemester(1)
+    cgpa.added()
     
     cgpa.calc()
     cgpa.display()
