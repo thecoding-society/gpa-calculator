@@ -4,7 +4,7 @@ class Subject:
     """
 
     # constructor
-    def __init__(self, credit, grade_point):
+    def __init__(self, credit: int, grade_point: int) -> None:
 
         # check if the credit and grade point are integers and are not negative
         if type(credit) != int:
@@ -18,7 +18,7 @@ class Subject:
         self.credit = credit
         self.grade_point = grade_point
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "Credit: " + str(self.credit) + "\nGrade Point: " + str(self.grade_point)
 
 
@@ -33,14 +33,14 @@ class Gpa(Subject):
     no_of_subjects = 0
 
     # Constructor
-    def __init__(self):
+    def __init__(self) -> None:
         self.gpa = 0.0
         self.numerator = 0.0
         self.denominator = 0.0
         self.sub=[]
 
     # Add a subject
-    def addsubject(self, credit, grade_point):
+    def addsubject(self, credit: int, grade_point: int) -> None:
         """
         addsubject(credit, grade_point)
         This function adds a subject to the list of subjects.
@@ -60,7 +60,7 @@ class Gpa(Subject):
         self.no_of_subjects += 1
 
     # Calculate GPA
-    def calc(self):
+    def calc(self) -> float:
         """
         calc()
         This function calculates the GPA of the student.
@@ -84,13 +84,13 @@ class Gpa(Subject):
         self.gpa = self.numerator / self.denominator
 
         # Check if GPA is valid
-        if self.gpa > 10:
-            print("GPA cannot be greater than 10. Please check your inputs.")
+        if self.gpa > 10 and self.gpa < 0:
+            print("GPA is not valid. Please check your inputs.")
             return
 
         return self.gpa
 
-    def display(self):
+    def display(self) -> None:
         """
         display()
         This function displays the number of subjects and the GPA.
@@ -113,7 +113,7 @@ class Gpa(Subject):
         print("No of subjects: ", self.no_of_subjects)
         print("GPA: ", self.gpa)
     
-    def __str__(self):
+    def __str__(self) -> str:
 
         if self.no_of_subjects == 0:
             return "No subjects added yet. Run gpa.addsubject(credit, grade_point) first."
@@ -135,7 +135,7 @@ class Cgpa(Gpa):
     
 
     # Add a semester gpa
-    def addsemester(self, gpa):
+    def addsemester(self, gpa: Gpa) -> None:
         """
         addsemester(gpa)
         This function adds a semester gpa to the list of semester gpa.
@@ -148,12 +148,11 @@ class Cgpa(Gpa):
             print(f"Cannot add semester. {str(e)}", )
             exit()
         else:
-            self.total_numerator += gpa.numerator
-            self.total_denominator += gpa.denominator
             self.semester.append(gpa)
+            
         
     # Calculate CGPA
-    def calc(self):
+    def calc(self) -> float:
         """
         calc()
         This function calculates the CGPA of the student.
@@ -162,17 +161,23 @@ class Cgpa(Gpa):
         if len(self.semester) == 0:
             raise ValueError("No semesters added yet. Run cgpa.addsemester(gpa) first.")
         
+        # Iterate through the list of semester gpa and calculate the numerator and denominator
+        for i in range(len(self.semester)):
+            self.total_numerator += self.semester[i].numerator
+            self.total_denominator += self.semester[i].denominator
 
+        # Calculate the CGPA with the numerator and denominator
         self.cgpa = self.total_numerator / self.total_denominator
 
-        if self.cgpa > 10:
-            print("CGPA cannot be greater than 10. Please check your inputs.")
+        # Check if CGPA is valid
+        if self.cgpa > 10 and self.cgpa < 0:
+            print("CGPA is not valid. Please check your inputs.")
             return
 
         return self.cgpa
     
     # Display CGPA
-    def display(self):
+    def display(self) -> None:
         """
         display()
         This function displays the number of semesters and the CGPA.
@@ -187,7 +192,7 @@ class Cgpa(Gpa):
         print("CGPA: ", self.cgpa)
     
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "No of semesters: " + str(len(self.semester)) + "CGPA: " + str(self.cgpa)
         
 
