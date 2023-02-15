@@ -133,7 +133,22 @@ class Gpa(Subject):
         print('Subjects added:')
         print(table.draw())
         
-
+    def removesubject(self, index: int) -> None:
+        """
+        removesubject(index)
+        Index values: 1-n
+        This function removes a subject from the list of subjects.
+        """
+        index = index-1
+        # Check if the index is valid
+        if index > self.no_of_subjects or index < 0:
+            raise ValueError(f"Index out of range. Input Index: {index+1} Index Region: 0 to {self.no_of_subjects}")
+            
+        
+        # Remove the subject from the list
+        removed = self.sub.pop(index-1)
+        self.no_of_subjects -= 1
+        print(f'Subject{removed.credit, removed.grade_point} removed successfully.')
 
     def __repr__(self) -> str:
         return "GPA Calculator"
@@ -145,6 +160,7 @@ class Gpa(Subject):
         
         return "No of subjects: " + str(self.no_of_subjects) + "GPA: " + str(self.gpa)
     
+
 class Cgpa(Gpa):
     """
     This class calculates the CGPA of a student.
@@ -258,7 +274,16 @@ def main():
     gpa1.addsubject(4, 9)
     gpa1.addsubject(3, 8)
     
+    
     gpa1.added()
+
+    # Remove a subject
+    gpa1.removesubject(1)
+    gpa1.removesubject(2)
+
+    gpa1.added()
+
+def fake():
     # create an object of the gpa class
     gpa2 = Gpa()
 
