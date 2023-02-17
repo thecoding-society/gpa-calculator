@@ -72,6 +72,13 @@ class Gpa(Subject):
         if self.no_of_subjects == 0:
             raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
             
+        # Check if there is at least one subject with grade point greater than 5
+        for i in range(self.no_of_subjects):
+            if self.sub[i].grade_point > 5:
+                break
+            else:
+                raise ValueError("No subjects with grade point greater than 5.")
+        
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
 
