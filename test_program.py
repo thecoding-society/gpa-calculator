@@ -115,13 +115,15 @@ def test_calc_1():
     obj.addsubject(3, 9)
     obj.addsubject(3, 8)
     obj.addsubject(2, 7)
-    obj.addsubject(2, 7)
+    obj.addsubject(2, 8)
     obj.addsubject(1, 9)
-    obj.addsubject(3, 8)
+    obj.addsubject(3, 9)
     obj.addsubject(2, 3)
     obj.calc()
+    
+    assert obj.no_of_subjects == 8
 
-    assert obj.gpa == 7.9
+    assert obj.gpa == 8.722222222222221
 
 
 def test_calc_2():
@@ -209,7 +211,7 @@ def test_display(capsys):
     captured = capsys.readouterr()
 
     # check if the output is correct
-    assert captured.out == "No of subjects:  8\nGPA:  7.9\n"
+    assert captured.out == "No of subjects:  8\nGPA:  8.444444444444445\n"
 
 
 def test_display_with_no_subjects():
@@ -277,3 +279,5 @@ def test_gpa_class(capsys):
 
     # check if the gpa is correct
     assert obj.gpa == 8.36
+
+

@@ -182,6 +182,9 @@ class Cgpa(Gpa):
         This function adds a semester gpa to the list of semester gpa.
         """
 
+        if not isinstance(gpa, Gpa):
+            raise TypeError("Input must be of type Gpa.")
+
         # Check if the gpa is calculatable else raise an error
         try:
             gpa.calc()
