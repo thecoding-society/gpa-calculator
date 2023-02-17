@@ -72,6 +72,8 @@ class Gpa(Subject):
         if self.no_of_subjects == 0:
             raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
             
+        
+        
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
 
@@ -182,17 +184,18 @@ class Cgpa(Gpa):
         This function adds a semester gpa to the list of semester gpa.
         """
 
+        # Check if the input is of type Gpa else raise an error
         if not isinstance(gpa, Gpa):
             raise TypeError("Input must be of type Gpa.")
 
         # Check if the gpa is calculatable else raise an error
-        try:
-            gpa.calc()
-        except Exception as e:
-            print(f"Cannot add semester. {str(e)}", )
-            exit()
-        else:
-            self.semester.append(gpa)
+        if gpa.no_of_subjects <= 0:
+            raise ValueError("No subjects added yet. Run gpa.addsubject(credit, grade_point) first.")
+        
+
+
+        gpa.calc()
+        self.semester.append(gpa)
             
         
     # Calculate CGPA
