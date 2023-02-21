@@ -74,10 +74,14 @@ class Gpa(Subject):
             
         # Check if there is at least one subject with grade point greater than 5
         for i in range(self.no_of_subjects):
+            greater_than_5 = False
             if self.sub[i].grade_point > 5:
-                break
+                greater_than_5 = True
             else:
-                raise ValueError("No subjects with grade point greater than 5.")
+                pass
+            
+        if not greater_than_5:
+            raise ValueError("No subjects with grade point greater than 5.")
         
         # Iterate through the list of subjects and calculate the numerator and denominator
         for i in range(self.no_of_subjects):
