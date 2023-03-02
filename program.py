@@ -292,7 +292,7 @@ class Cgpa(Gpa):
 def main():
 
     print("GPA Calculator")
-    print("--------------\n")
+    print("-------------------\n")
     
 
     # Create an object of the gpa class
